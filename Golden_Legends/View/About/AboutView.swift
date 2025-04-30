@@ -31,5 +31,6 @@ struct AboutView: View {
             
         }
         .edgesIgnoringSafeArea(.all)
+        .navigationBarHidden(true)
     }
 }
