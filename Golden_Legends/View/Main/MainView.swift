@@ -1,8 +1,16 @@
 
 import SwiftUI
 
+//MARK: - Router for navigation
+enum MainRoute {
+    case quiz, settings, about
+}
+
+//MARK: - Main View in project, contains navigation on other views
 struct MainView: View {
-    
+    @State private var selectedRoute: MainRoute?
+    @StateObject private var interactor = SettingsInteractor()
+
     var body: some View {
         GeometryReader { proxy in
             NavigationView {
@@ -11,43 +19,57 @@ struct MainView: View {
                         .resizable()
                         .scaledToFill()
                         .edgesIgnoringSafeArea(.all)
-                    
+
                     VStack(spacing: 8) {
                         VStack(spacing: 10) {
-                            NavigationLink(destination:
-                            QuizFlowView()
-                                .navigationBarHidden(true)
-                            ) {
+                            //MARK: - Start game
+                            Button {
+                                AudioManager.shared.playButtonEffect()
+                                selectedRoute = .quiz
+                            } label: {
                                 Image("startGameButton")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(maxWidth: 300)
                             }
-                            NavigationLink(destination: SettingsView()) {
+                            
+                            //MARK: - Settings
+                            Button {
+                                AudioManager.shared.playButtonEffect()
+                                selectedRoute = .settings
+                            } label: {
                                 Image("settingsButton")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(maxWidth: 300)
                             }
                         }
-                        NavigationLink(destination: AboutView()) {
+
+                        //MARK: - About
+                        Button {
+                            AudioManager.shared.playButtonEffect()
+                            selectedRoute = .about
+                        } label: {
                             Image("aboutButton")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(maxWidth: 300)
                         }
                     }
-                    .padding(.bottom,proxy.size.height < 650 ? 150 : 95)
+                    .padding(.bottom, proxy.size.height < 650 ? 150 : 95)
+
+                    
+                    //MARK: - Navigation
+                    NavigationLink(destination: QuizFlowView().navigationBarHidden(true), tag: .quiz, selection: $selectedRoute) { EmptyView() }
+                    NavigationLink(destination: SettingsView(presenter: SettingsPresenter()).navigationBarHidden(true), tag: .settings, selection: $selectedRoute) { EmptyView() }
+                    NavigationLink(destination: AboutView().navigationBarHidden(true), tag: .about, selection: $selectedRoute) { EmptyView() }
                 }
-                .edgesIgnoringSafeArea(.all)
-                
             }
-            
+            .onAppear {
+                if interactor.isMusicOn {
+                    AudioManager.shared.playBackgroundMusic()
+                }
+            }
         }
     }
-}
-
-
-#Preview {
-    MainView()
 }

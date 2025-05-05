@@ -1,8 +1,9 @@
 
 import SwiftUI
 
+//MARK: - View with Chest
 struct YouFindATrasureView: View {
-    var onContinue: () -> Void
+    var onContinue: () -> Void // callBack on quiz
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -12,6 +13,7 @@ struct YouFindATrasureView: View {
                 .edgesIgnoringSafeArea(.all)
             
             Button {
+                AudioManager.shared.playButtonEffect()
                 onContinue()
             } label: {
                 Image("continueButton")

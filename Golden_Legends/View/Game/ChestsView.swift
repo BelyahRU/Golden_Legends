@@ -1,11 +1,8 @@
 import SwiftUI
 
+//MARK: - View with 9 chests
 struct ChestsView: View {
-    @State private var selectedIndex: Int? = nil
-
-    let chestNames = ["chest1", "chest2", "chest3"]
-    let chestSelectedNames = ["chest1Selected", "chest2Selected", "chest3Selected"]
-
+    @ObservedObject var interactor = ChestInteractor()
     var onChestSelected: (Int) -> Void
 
     var body: some View {
@@ -15,11 +12,14 @@ struct ChestsView: View {
                     .resizable()
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
+                //label
                 Image("chooseYourTreasureLabel")
                     .resizable()
                     .scaledToFit()
                     .frame(maxWidth: 275)
                     .position(CGPoint(x: proxy.size.width / 2, y: 140))
+
+                //chests
                 VStack {
                     Spacer()
                     VStack(spacing: 20) {
@@ -29,9 +29,10 @@ struct ChestsView: View {
                                     let chestIndex = col
                                     let index = row * 3 + col
                                     Button {
-                                        selectedIndex = selectedIndex == index ? nil : index
+                                        AudioManager.shared.playButtonEffect()
+                                        interactor.select(index: index)
                                     } label: {
-                                        Image(selectedIndex == index ? chestSelectedNames[chestIndex] : chestNames[chestIndex])
+                                        Image(interactor.selectedIndex == index ? "chest\(chestIndex + 1)Selected" : "chest\(chestIndex + 1)")
                                             .resizable()
                                             .scaledToFit()
                                             .frame(width: 100, height: 95)
@@ -41,11 +42,13 @@ struct ChestsView: View {
                         }
                     }
                     .padding(.bottom, -120)
-                    
+
                     Spacer()
-                    
+
+                    //opening
                     Button {
-                        if let selected = selectedIndex {
+                        AudioManager.shared.playButtonEffect()
+                        if let selected = interactor.selectedIndex {
                             onChestSelected(selected)
                         }
                     } label: {
@@ -56,7 +59,6 @@ struct ChestsView: View {
                     .padding(.bottom, proxy.size.height > 750 ? 120 : 70)
                 }
             }
-            
         }
     }
 }

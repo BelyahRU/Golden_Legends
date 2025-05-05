@@ -1,11 +1,14 @@
+
 import SwiftUI
 
+//MARK: - Quiz
 struct QuizView: View {
     let questionIndex: Int
     let onAnswerSelected: (Int) -> Void
 
     @State private var selectedAnswer: Int? = nil
 
+    //image names for quiz
     let questions = [
         ("question1Image", "question1", "anwer_1_1", "anwer_1_2"),
         ("question2Image", "question2", "anwer_2_1", "anwer_2_2"),
@@ -24,11 +27,13 @@ struct QuizView: View {
                 .edgesIgnoringSafeArea(.all)
             VStack(alignment: .center, spacing: 20) {
                 VStack(alignment: .center, spacing: 30) {
+                    //MARK: - Question№1, Question№2, Question№3...
                     Image(question.0)
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 315)
 
+                    //MARK: - Main Question
                     Image(question.1)
                         .resizable()
                         .scaledToFit()
@@ -36,7 +41,9 @@ struct QuizView: View {
                 }
                 .padding(.top, 59)
 
+                //MARK: - Answer 1
                 Button {
+                    AudioManager.shared.playButtonEffect()
                     selectedAnswer = 1
                 } label: {
                     Image(question.2)
@@ -46,7 +53,9 @@ struct QuizView: View {
                         .overlay(RoundedRectangle(cornerRadius: 10).stroke(selectedAnswer == 1 ? Color.white : Color.clear, lineWidth: 2))
                 }
 
+                //MARK: - Answer 2
                 Button {
+                    AudioManager.shared.playButtonEffect()
                     selectedAnswer = 2
                 } label: {
                     Image(question.3)
@@ -56,7 +65,9 @@ struct QuizView: View {
                         .overlay(RoundedRectangle(cornerRadius: 10).stroke(selectedAnswer == 2 ? Color.white : Color.clear, lineWidth: 2))
                 }
 
+                //MARK: - Next button
                 Button {
+                    AudioManager.shared.playButtonEffect()
                     if let answer = selectedAnswer {
                         onAnswerSelected(answer)
                     }

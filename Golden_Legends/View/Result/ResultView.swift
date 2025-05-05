@@ -2,6 +2,7 @@
 
 import SwiftUI
 
+//MARK: - View which contains result of quiz. It calculated in QuizIterator
 struct ResultView: View {
     let resultImageName: String
     
@@ -14,7 +15,9 @@ struct ResultView: View {
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
             
+            //MARK: - End quiz, back on MainView
             Button {
+                AudioManager.shared.playButtonEffect()
                 onMain()
             } label: {
                 Image("enterTheGoldenRoomButton")

@@ -1,65 +1,39 @@
 
 import SwiftUI
 
+//MARK: - View which manages audio settings
 struct SettingsView: View {
-    
+    @ObservedObject var presenter: SettingsPresenter
     @Environment(\.presentationMode) var presentationMode
-    
-    @State var isMusicOn = true
-    @State var isSoundEffectOn = false
-    
+
     var body: some View {
         ZStack(alignment: .bottom) {
             Image("settingsBackground")
                 .resizable()
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
-            VStack {
-                VStack(spacing: 90) {
-                    VStack(spacing: 40) {
-                        HStack(spacing: 16) {
-                            Image("musicLabelImage")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(maxHeight: 80)
-                            Button {
-                                isMusicOn.toggle()
-                            } label: {
-                                Image(isMusicOn ? "onButton": "offButton")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(maxWidth: 125)
-                            }
-                        }
-                        HStack(spacing: 16) {
-                            Image("soundEffectsLabelImage")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(maxHeight: 90)
-                            Button {
-                                isSoundEffectOn.toggle()
-                            } label: {
-                                Image(isSoundEffectOn ? "onButton": "offButton")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(maxWidth: 125)
-                            }
-                        }
-                    }
-                    Button {
-                        presentationMode.wrappedValue.dismiss()
-                    } label: {
-                        Image("backButton")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxWidth: 300)
-                    }
+            
+            VStack(spacing: 90) {
+                VStack(spacing: 40) {
+                    //MARK: - Music
+                    ToggleRow(labelImage: "musicLabelImage", isOn: $presenter.interactor.isMusicOn)
+                    //MARK: - Button effect
+                    ToggleRow(labelImage: "soundEffectsLabelImage", isOn: $presenter.interactor.isSoundEffectOn)
                 }
                 
+                //MARK: - Back button
+                Button {
+                    AudioManager.shared.playButtonEffect()
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    Image("backButton")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 300)
+                }
             }
             .padding(.bottom, 65)
         }
-        .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
     }
 }
