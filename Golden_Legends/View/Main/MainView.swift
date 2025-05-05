@@ -14,7 +14,9 @@ struct MainView: View {
                     
                     VStack(spacing: 8) {
                         VStack(spacing: 10) {
-                            NavigationLink(destination: StartGameView()) {
+                            NavigationLink(destination: ChestsView(onChestSelected: { data in
+                                print(data)
+                            })) {
                                 Image("startGameButton")
                                     .resizable()
                                     .scaledToFit()
