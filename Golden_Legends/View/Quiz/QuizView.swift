@@ -9,12 +9,13 @@ struct QuizView: View {
     @State private var selectedAnswer: Int? = nil
 
     //image names for quiz
+    
     let questions = [
-        ("question1Image", "question1", "anwer_1_1", "anwer_1_2"),
-        ("question2Image", "question2", "anwer_2_1", "anwer_2_2"),
-        ("question3Image", "question3", "anwer_3_1", "anwer_3_2"),
-        ("question4Image", "question4", "anwer_4_1", "anwer_4_2"),
-        ("question5Image", "question5", "anwer_5_1", "anwer_5_2")
+        ("question1Image", "q1", "anwer_1_1", "anwer_1_2"),
+        ("question2Image", "q2", "anwer_2_1", "anwer_2_2"),
+        ("question3Image", "q3", "anwer_3_1", "anwer_3_2"),
+        ("question4Image", "q4", "anwer_4_1", "anwer_4_2"),
+        ("question5Image", "q5", "anwer_5_1", "anwer_5_2")
     ]
 
     var body: some View {
