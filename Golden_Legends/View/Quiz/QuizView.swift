@@ -43,7 +43,7 @@ struct QuizView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 307)
-                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(selectedAnswer == 1 ? Color.white : Color.clear, lineWidth: 4))
+                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(selectedAnswer == 1 ? Color.white : Color.clear, lineWidth: 2))
                 }
 
                 Button {
@@ -53,7 +53,7 @@ struct QuizView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 307)
-                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(selectedAnswer == 2 ? Color.white : Color.clear, lineWidth: 4))
+                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(selectedAnswer == 2 ? Color.white : Color.clear, lineWidth: 2))
                 }
 
                 Button {

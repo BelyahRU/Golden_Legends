@@ -1,26 +1,28 @@
 
+
 import SwiftUI
 
-struct YouFindATrasureView: View {
-    var onContinue: () -> Void
+struct ResultView: View {
+    let resultImageName: String
+    
+    var onMain: () -> Void
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            Image("treasureBackground")
+            Image(resultImageName)
                 .resizable()
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
             
             Button {
-                onContinue()
+                onMain()
             } label: {
-                Image("continueButton")
+                Image("enterTheGoldenRoomButton")
                     .resizable()
                     .scaledToFit()
-                    .frame(maxWidth: 312)
+                    .frame(maxWidth: 342)
             }
             .padding(.bottom, 70)
         }
     }
 }
-

@@ -53,7 +53,7 @@ struct ChestsView: View {
                             .resizable()
                             .frame(width: 239, height: 117)
                     }
-                    .padding(.bottom, proxy.size.height > 750 ? 120 : 65)
+                    .padding(.bottom, proxy.size.height > 750 ? 120 : 70)
                 }
             }
             
