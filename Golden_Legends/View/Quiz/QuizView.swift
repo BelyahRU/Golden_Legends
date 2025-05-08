@@ -10,6 +10,7 @@ struct QuizView: View {
 
     //image names for quiz
     
+    
     let questions = [
         ("question1Image", "q1", "anwer_1_1", "anwer_1_2"),
         ("question2Image", "q2", "anwer_2_1", "anwer_2_2"),
