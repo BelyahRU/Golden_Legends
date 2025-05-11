@@ -22,7 +22,7 @@ final class QuizPresenter: ObservableObject {
 
     // changing QuizFlowView state
     func nextStep() {
-        if currentStep >= 4 {
+        if currentStep >= 9 { // 10 вопросов
             result = interactor.calculateResult()
             state = .result
         } else {
@@ -30,6 +30,12 @@ final class QuizPresenter: ObservableObject {
             state = .question
         }
     }
+    
+    func getCurrentQuestion() -> Question {
+        interactor.getQuestion(for: currentStep)
+    }
+
+
 
 }
 

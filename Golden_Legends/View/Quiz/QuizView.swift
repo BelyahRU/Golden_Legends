@@ -2,38 +2,30 @@
 import SwiftUI
 
 //MARK: - Quiz
+
 struct QuizView: View {
-    let questionIndex: Int
+    let question: Question // теперь напрямую передаём вопрос
+    let displayIndex: Int // 0...9
     let onAnswerSelected: (Int) -> Void
 
     @State private var selectedAnswer: Int? = nil
 
-    //image names for quiz
-    let questions = [
-        ("question1Image", "q1", "anwer_1_1", "anwer_1_2"),
-        ("question2Image", "q2", "anwer_2_1", "anwer_2_2"),
-        ("question3Image", "q3", "anwer_3_1", "anwer_3_2"),
-        ("question4Image", "q4", "anwer_4_1", "anwer_4_2"),
-        ("question5Image", "q5", "anwer_5_1", "anwer_5_2")
-    ]
-
     var body: some View {
-        let question = questions[questionIndex]
-
         ZStack {
+            
             Image("baseBackground")
                 .resizable()
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
             VStack(alignment: .center, spacing: 15) {
-                //MARK: - Question№1, Question№2, Question№3...
-                Image(question.0)
+                //MARK: - Question image
+                Image("question\(displayIndex + 1)Image")
                     .resizable()
                     .scaledToFit()
                     .frame(maxWidth: 315)
 
-                //MARK: - Main Question
-                Image(question.1)
+                //MARK: - Question text
+                Image(question.image) // это q1...q24
                     .resizable()
                     .scaledToFit()
                     .frame(maxWidth: 280)
@@ -43,7 +35,7 @@ struct QuizView: View {
                     AudioManager.shared.playButtonEffect()
                     selectedAnswer = 1
                 } label: {
-                    Image(question.2)
+                    Image("anwer_\(question.id)_1")
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 307)
@@ -55,7 +47,7 @@ struct QuizView: View {
                     AudioManager.shared.playButtonEffect()
                     selectedAnswer = 2
                 } label: {
-                    Image(question.3)
+                    Image("anwer_\(question.id)_2")
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 307)
@@ -77,6 +69,9 @@ struct QuizView: View {
                 .padding(.bottom, 5)
             }
             .padding(.vertical, 30)
+        }
+        .onAppear {
+            print("Now showing question #\(displayIndex + 1) (original id: \(question.id))")
         }
     }
 }

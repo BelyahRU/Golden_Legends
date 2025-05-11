@@ -10,10 +10,12 @@ enum QuizResult: String {
 }
 
 //MARK: - Question Model
-struct Question {
+struct Question: Identifiable {
+    let id: Int // номер вопроса 1...24
     let image: String
     let text: String
     let answer1: String
     let answer2: String
 }
+
 

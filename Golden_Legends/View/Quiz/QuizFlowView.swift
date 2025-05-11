@@ -30,9 +30,13 @@ struct QuizFlowView: View {
 
             //MARK: - QuizView
             case .question:
-                QuizView(questionIndex: presenter.currentStep) { answer in
+                QuizView(
+                    question: presenter.getCurrentQuestion(),
+                    displayIndex: presenter.currentStep
+                ) { answer in
                     presenter.submitAnswer(answer)
                 }
+
             }
         }
     }
