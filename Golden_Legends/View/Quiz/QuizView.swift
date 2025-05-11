@@ -9,8 +9,6 @@ struct QuizView: View {
     @State private var selectedAnswer: Int? = nil
 
     //image names for quiz
-    
-    
     let questions = [
         ("question1Image", "q1", "anwer_1_1", "anwer_1_2"),
         ("question2Image", "q2", "anwer_2_1", "anwer_2_2"),
@@ -27,21 +25,18 @@ struct QuizView: View {
                 .resizable()
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
-            VStack(alignment: .center, spacing: 20) {
-                VStack(alignment: .center, spacing: 30) {
-                    //MARK: - Question№1, Question№2, Question№3...
-                    Image(question.0)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: 315)
+            VStack(alignment: .center, spacing: 15) {
+                //MARK: - Question№1, Question№2, Question№3...
+                Image(question.0)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: 315)
 
-                    //MARK: - Main Question
-                    Image(question.1)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: 280)
-                }
-                .padding(.top, 59)
+                //MARK: - Main Question
+                Image(question.1)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: 280)
 
                 //MARK: - Answer 1
                 Button {
@@ -79,8 +74,9 @@ struct QuizView: View {
                         .scaledToFit()
                         .frame(maxWidth: 219)
                 }
-                .padding(.top, 20)
+                .padding(.bottom, 5)
             }
+            .padding(.vertical, 30)
         }
     }
 }

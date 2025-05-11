@@ -17,11 +17,11 @@ struct ChestsView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(maxWidth: 275)
-                    .position(CGPoint(x: proxy.size.width / 2, y: 140))
+                    .position(CGPoint(x: proxy.size.width / 2, y: 110))
 
                 //chests
-                VStack {
-                    Spacer()
+                VStack(alignment: .center, spacing: 20) {
+//                    Spacer()
                     VStack(spacing: 20) {
                         ForEach(0..<3, id: \.self) { row in
                             HStack(spacing: 15) {
@@ -41,9 +41,8 @@ struct ChestsView: View {
                             }
                         }
                     }
-                    .padding(.bottom, -120)
 
-                    Spacer()
+//                    Spacer()
 
                     //opening
                     Button {
@@ -56,7 +55,7 @@ struct ChestsView: View {
                             .resizable()
                             .frame(width: 239, height: 117)
                     }
-                    .padding(.bottom, proxy.size.height > 750 ? 120 : 70)
+//                    .padding(.bottom, 70)
                 }
             }
         }

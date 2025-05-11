@@ -9,23 +9,25 @@ struct ResultView: View {
     var onMain: () -> Void
 
     var body: some View {
-        ZStack(alignment: .bottom) {
-            Image(resultImageName)
-                .resizable()
-                .scaledToFill()
-                .edgesIgnoringSafeArea(.all)
-            
-            //MARK: - End quiz, back on MainView
-            Button {
-                AudioManager.shared.playButtonEffect()
-                onMain()
-            } label: {
-                Image("enterTheGoldenRoomButton")
+        GeometryReader { proxy in
+            ZStack(alignment: .bottom) {
+                Image(resultImageName)
                     .resizable()
-                    .scaledToFit()
-                    .frame(maxWidth: 342)
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                
+                //MARK: - End quiz, back on MainView
+                Button {
+                    AudioManager.shared.playButtonEffect()
+                    onMain()
+                } label: {
+                    Image("enterTheGoldenRoomButton")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 342)
+                }
+                .position(x: proxy.size.width / 2, y: proxy.size.height - 80)
             }
-            .padding(.bottom, 70)
         }
     }
 }

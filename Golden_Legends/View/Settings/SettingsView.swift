@@ -7,13 +7,13 @@ struct SettingsView: View {
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
-        ZStack(alignment: .bottom) {
+        ZStack(alignment: .top) {
             Image("settingsBackground")
                 .resizable()
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
             
-            VStack(spacing: 90) {
+            VStack(spacing: 70) {
                 VStack(spacing: 40) {
                     //MARK: - Music
                     ToggleRow(labelImage: "musicLabelImage", isOn: $presenter.interactor.isMusicOn)
@@ -32,7 +32,7 @@ struct SettingsView: View {
                         .frame(maxWidth: 300)
                 }
             }
-            .padding(.bottom, 65)
+            .padding(.top, 350)
         }
         .navigationBarHidden(true)
     }
