@@ -2,7 +2,6 @@
 import SwiftUI
 
 //MARK: - Quiz
-
 struct QuizView: View {
     let question: Question // теперь напрямую передаём вопрос
     let displayIndex: Int // 0...9
@@ -17,7 +16,7 @@ struct QuizView: View {
                 .resizable()
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
-            VStack(alignment: .center, spacing: 15) {
+            VStack(alignment: .center, spacing: 12) {
                 //MARK: - Question image
                 Image("question\(displayIndex + 1)Image")
                     .resizable()
@@ -28,7 +27,7 @@ struct QuizView: View {
                 Image(question.image) // это q1...q24
                     .resizable()
                     .scaledToFit()
-                    .frame(maxWidth: 280)
+                    .frame(maxWidth: 280, maxHeight: 78)
 
                 //MARK: - Answer 1
                 Button {
@@ -66,7 +65,7 @@ struct QuizView: View {
                         .scaledToFit()
                         .frame(maxWidth: 219)
                 }
-                .padding(.bottom, 5)
+                .padding(.bottom, 12)
             }
             .padding(.vertical, 30)
         }
